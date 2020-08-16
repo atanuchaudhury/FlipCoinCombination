@@ -1,32 +1,33 @@
-#! /bin/bash -x
+#!/bin/bash -x
 
-declare -A countArr
-echo Enter number of turn
-read numberOfTurn
+read -p "how much time you flip the coin " number
+read -p "How many coins " coin
+declare -A result
 
-head=1;
-tail=0;
-countHead=0;
-countTail=0;
-for (( i=0; i<=numberofTurn; i++ ))
+headCount=0
+tailCount=0
+headHead=0
+tailHead=0
+HeadTail=0
+
+function coin() {
+for ((i=1; i<=$number; i++ ))
 do
-
-Flip=$((RANDOM%2))
-
-if [ $Flip -eq $head ]
-then
-	countHead=$(( $countHead+1 ))
-        echo Head
-else
-	 countTail=$(( $countTail+1 ))
-         echo Tail
-fi
+s=""
+for ((j=0; j<$coin; j++ ))
+do
+        resultk=$(( RANDOM % 2 ))
+        if [ $result -eq 1 ]
+        then
+        s=$s"H"
+                headCount=$(( $headCount =1 ))
+        else
+        s=$s"T"
+        tailCount=$(( $tailCount + 1 ))
+        fi
 done
-
-countArr[((countHead))]=$countHead
-countArr[((countTail))]=$countTail
-
-echo "Number of head " ${countArr[countHead]}
-echo "Number of Tail " ${countArr[countTail]}
-percentageHead=$(($countHead*100/$numberOfTurn))
-percentageTail=$(($countTail*100/$numberOfTurn))
+echo final key : $s
+result["$s"]=$(( ${result["$s"]} + 1 ))
+done
+}
+coin
